@@ -1,0 +1,25 @@
+<div class="title">
+  <h2>GAME RESULTS</h2>
+</div>
+<div class="content-main">
+  <div class="row" *ngFor="let data of response">
+    <div class="col">
+      <div class="team-logo">
+        <img src="{{ data.teams.home?.logo }}" alt="{{ data.teams.home?.name }}">
+      </div>
+      <span class="team-name">{{ data.teams.home?.name }}</span>
+      <span class="team-goal">{{ data.goals.home }}</span>
+    </div>
+    <div class="col">
+      <span class="separator">-</span>
+    </div>
+    <div class="col">
+      <div class="team-logo">
+        <img src="{{ data.teams.away?.logo }}" alt="{{ data.teams.away?.name }}">
+      </div>
+      <span class="team-name team-name-right">{{ data.teams.away?.name }}</span>
+      <span class="team-goal">{{ data.goals.away }}</span>
+    </div>
+  </div>
+  <button type="button" (click)="goToBack()" class="btn">Back</button>
+</div>

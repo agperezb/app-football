@@ -1,0 +1,48 @@
+<div class="main-league-classification">
+  <div class="title">
+    <h2>FOOTBALL UPDATES</h2>
+  </div>
+  <div class="content-main">
+    <ul class="menu-nav">
+      <li *ngFor="let country of countries" class="nav-item">
+        <a type="button" id="{{country.name}}Select" class="btn-select" (click)="searchLeague(country.id, $event)">{{country.name}}</a>
+      </li>
+    </ul>
+  </div>
+  <div class="content-main">
+    <ng-container *ngIf="isEmpty; then thenBlock; else elseBlock"></ng-container>
+
+    <ng-template #thenBlock>
+      <table class="table" aria-describedby="league">
+        <tr>
+          <th>Id</th>
+          <th></th>
+          <th>Name</th>
+          <th>Games</th>
+          <th>W</th>
+          <th>L</th>
+          <th>D</th>
+          <th>Goal Difference</th>
+          <th>Points</th>
+        </tr>
+        <tr *ngFor="let data of response; let i=index;" [routerLink]="['/game-results', league, data.team.id]">
+          <td>{{ data.rank }}</td>
+          <td>
+            <img src="{{ data.team.logo }}" alt="{{ data.team.name }}" width="28px" height="28px">
+          </td>
+          <td>{{ data.team.name }}</td>
+          <td>{{ data.all.played }}</td>
+          <td>{{ data.all.win }}</td>
+          <td>{{ data.all.lose }}</td>
+          <td>{{ data.all.draw }}</td>
+          <td>{{ data.all.goals.for - data.all.goals.against  }}</td>
+          <td>{{ data.points }}</td>
+        </tr>
+      </table>
+    </ng-template>
+
+    <ng-template #elseBlock>
+      Select a country
+    </ng-template>
+  </div>
+</div>
